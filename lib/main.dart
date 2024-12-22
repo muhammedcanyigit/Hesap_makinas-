@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:math'; // Pi ve karekök işlemleri için gerekli
-import 'package:math_expressions/math_expressions.dart'; // Matematiksel ifadeleri çözmek için
+import 'dart:math'; // 
+import 'package:math_expressions/math_expressions.dart'; 
 
 void main() => runApp(const Hesap());
 
@@ -11,7 +11,7 @@ class Hesap extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Hesap Makinesi',
-      themeMode: ThemeMode.dark,  // Dark tema
+      themeMode: ThemeMode.dark,  
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
@@ -49,45 +49,44 @@ class Anaekran extends StatefulWidget {
 }
 
 class _AnaEkranState extends State<Anaekran> {
-  String _display = ""; // Ekranda gösterilen metin
-
-  // Hesaplama işlevi
+  String _display = ""; 
+  
   void _onButtonPressed(String value) {
     setState(() {
       if (value == "AC") {
-        _display = ""; // Tüm ekranı temizler
+        _display = ""; 
       } else if (value == "DEL") {
         if (_display.isNotEmpty) {
-          _display = _display.substring(0, _display.length - 1); // Son karakteri siler
+          _display = _display.substring(0, _display.length - 1); 
         }
       } else if (value == "=") {
         try {
-          _display = _calculateResult(_display); // Hesaplama yapılacak kısmı burada gerçekleştireceğiz
+          _display = _calculateResult(_display); 
         } catch (e) {
-          _display = "HATA"; // Hata durumunda gösterilecek mesaj
+          _display = "HATA"; 
         }
       } else if (value == "π") {
-        _display += pi.toStringAsFixed(5); // Pi'yi 5 basamakla ekler
+        _display += pi.toStringAsFixed(5); 
       } else {
-        _display += value; // Diğer durumlarda tıklanan tuşu ekler
+        _display += value; 
       }
     });
   }
 
   String _calculateResult(String input) {
     try {
-      // Çarpma ve bölme sembollerini dönüştür
+
       input = input.replaceAll("×", "*").replaceAll("÷", "/");
 
-      // Matematiksel ifadeleri çözmek için math_expressions kütüphanesini kullanıyoruz
+
       Parser p = Parser();
       Expression exp = p.parse(input);
       ContextModel cm = ContextModel();
       double result = exp.evaluate(EvaluationType.REAL, cm);
 
-      return result.toStringAsFixed(2); // Sonucu iki basamağa yuvarlar
+      return result.toStringAsFixed(2); 
     } catch (e) {
-      return "HATA"; // Geçersiz giriş durumunda
+      return "HATA"; 
     }
   }
 
@@ -95,7 +94,7 @@ class _AnaEkranState extends State<Anaekran> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Ekran Gösterimi
+
         Expanded(
           child: Container(
             color: Colors.black,
@@ -107,11 +106,11 @@ class _AnaEkranState extends State<Anaekran> {
             ),
           ),
         ),
-        // Tuşlar
+
         Expanded(
           flex: 2,
           child: GridView.count(
-            crossAxisCount: 4, // 4 sütun
+            crossAxisCount: 4, 
             children: [
               _buildButton("AC", Colors.red),
               _buildButton("DEL", Colors.orange),
@@ -147,7 +146,7 @@ class _AnaEkranState extends State<Anaekran> {
         backgroundColor: color,
         padding: const EdgeInsets.all(20),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.zero, // Daire değil, köşeli kutu
+          borderRadius: BorderRadius.zero, 
         ),
       ),
       child: Text(
